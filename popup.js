@@ -1,20 +1,50 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var checkPageButton = document.getElementById('checkPage');
-  checkPageButton.addEventListener('click', function() {
+function getAllLinks()
+{
+  var arr = []
+  var l = document.links;
+  for(var i=0; i<l.length; i++)
+  {
+    arr.push(l[i].href);
+  }
+  return arr;
+}
 
-    chrome.tabs.getSelected(null, function(tab) {
-      d = document;
+function countLinks(arr)
+{
+  var links = new Array();
+  var counts = new Array();
 
-      var f = d.createElement('form');
-      f.action = 'https://www.100percentpure.com/';
-      f.method = 'post';
-      var i = d.createElement('input');
-      i.type = 'hidden';
-      i.name = 'url';
-      i.value = tab.url;
-      f.appendChild(i);
-      d.body.appendChild(f);
-      f.submit();
-    });
-  }, false);
-}, false);
+  if(arr.length > 0)
+  {
+    for(var i = 0; i < arr.length; i++)
+    {
+      var currentLink = arr[i];
+      if(!links.includes(currentLink))
+      {
+        links.push(currentLink);
+        counts.push(1);
+      }
+      else
+      {
+        for(var j = 0; j < counts.length; j++)
+        {
+          if(currentLink == links[j])
+          {
+            counts[j]++;
+          }
+        }
+      }
+    }
+  }
+  arr = [links, counts];
+  return arr;
+}
+
+function run()
+{
+  var finalArr = countLinks(getAllLinks()); //2x2 array
+  for(var i = 0; i < finalArr[0].length; i++)
+  {
+    console.log(finalArr[0][i] + ": " + finalArr[1][i]);
+  }
+}
