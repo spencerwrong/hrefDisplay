@@ -1,50 +1,58 @@
-function getAllLinks()
-{
-  var arr = []
-  var l = document.links;
-  for(var i=0; i<l.length; i++)
-  {
-    arr.push(l[i].href);
-  }
-  return arr;
-}
-
-function countLinks(arr)
-{
-  var links = new Array();
-  var counts = new Array();
-
-  if(arr.length > 0)
-  {
-    for(var i = 0; i < arr.length; i++)
+document.addEventListener('DOMContentLoaded', function() {
+    var link = document.getElementById('link');
+    function getAllLinks()
     {
-      var currentLink = arr[i];
-      if(!links.includes(currentLink))
+      var arr = []
+      var l = document.links;
+      for(var i=0; i<l.length; i++)
       {
-        links.push(currentLink);
-        counts.push(1);
+        arr.push(l[i].href);
       }
-      else
+      return arr;
+    }
+
+    function countLinks(arr)
+    {
+      var links = new Array();
+      var counts = new Array();
+
+      if(arr.length > 0)
       {
-        for(var j = 0; j < counts.length; j++)
+        for(var i = 0; i < arr.length; i++)
         {
-          if(currentLink == links[j])
+          var currentLink = arr[i];
+          if(!links.includes(currentLink))
           {
-            counts[j]++;
+            links.push(currentLink);
+            counts.push(1);
+          }
+          else
+          {
+            for(var j = 0; j < counts.length; j++)
+            {
+              if(currentLink == links[j])
+              {
+                counts[j]++;
+              }
+            }
           }
         }
       }
+      arr = [links, counts];
+      return arr;
     }
-  }
-  arr = [links, counts];
-  return arr;
-}
 
-function run()
-{
-  var finalArr = countLinks(getAllLinks()); //2x2 array
-  for(var i = 0; i < finalArr[0].length; i++)
-  {
-    console.log(finalArr[0][i] + ": " + finalArr[1][i]);
-  }
-}
+    function run()
+    {
+      var finalArr = countLinks(getAllLinks()); //2x2 array
+      for(var i = 0; i < finalArr[0].length; i++)
+      {
+        console.log(finalArr[0][i] + ": " + finalArr[1][i]);
+      }
+    }
+    link.addEventListener('click', function() {
+        run();
+    });
+});
+
+

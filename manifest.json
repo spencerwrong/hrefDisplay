@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "hrefDisplay",
-  "description": "Displays the href source links in an HTML document.",
+  "description": "Displays the count of each unique URL in an HTML document.",
   "version": "1.0",
 
   "browser_action": {
