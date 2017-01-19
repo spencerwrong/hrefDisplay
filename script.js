@@ -36,3 +36,5 @@ function printLinks() {
     document.write(finalArr[0][i] + ": " + finalArr[1][i] + "<br>");
   }
 }
+
+printLinks();
